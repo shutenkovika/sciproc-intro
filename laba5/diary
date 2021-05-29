@@ -1,0 +1,332 @@
+octave:2>  D = [ 1 1 ; 2 2 ; 3 5 ; 4 4 ; 5 2 ; 6 -3]
+D =
+
+   1   1
+   2   2
+   3   5
+   4   4
+   5   2
+   6  -3
+
+octave:3> xdata = D(:,1)
+xdata =
+
+   1
+   2
+   3
+   4
+   5
+   6
+
+octave:4> ydata = D(:,2)
+ydata =
+
+   1
+   2
+   5
+   4
+   2
+  -3
+
+octave:5> plot(xdata,ydata,'o-')
+octave:6> 
+octave:6> print graph1.png -dpng
+octave:7> print('graph1.pdf','-dpdf')
+octave:8> A = ones(6,3)
+A =
+
+   1   1   1
+   1   1   1
+   1   1   1
+   1   1   1
+   1   1   1
+   1   1   1
+
+octave:9> A(:,1) = xdata .^ 2
+A =
+
+    1    1    1
+    4    1    1
+    9    1    1
+   16    1    1
+   25    1    1
+   36    1    1
+
+octave:10> A(:,2) = xdata
+A =
+
+    1    1    1
+    4    2    1
+    9    3    1
+   16    4    1
+   25    5    1
+   36    6    1
+
+octave:11> A'*A
+ans =
+
+   2275    441     91
+    441     91     21
+     91     21      6
+
+octave:12> A' * ydata
+ans =
+
+   60
+   28
+   11
+
+octave:13> B = A' * A;
+octave:14> B (:,4) = A' * ydata;
+octave:15> B_res = rref (B)
+B_res =
+
+   1.0000        0        0  -0.8929
+        0   1.0000        0   5.6500
+        0        0   1.0000  -4.4000
+
+octave:16> a1=B_res(1,4)
+a1 = -0.8929
+octave:17> a2=B_res(2,4)
+a2 = 5.6500
+octave:18> a3=B_res(3,4)
+a3 = -4.4000
+octave:19> x = linspace (0,7,50);
+octave:20> y = a1 * x .^ 2 + a2 * x + a3;
+octave:21> plot (xdata,ydata, 'o' ,x,y, 'linewidth', 2)
+octave:22> grid on;
+octave:23> legend ('data values', 'least-squares parabola')
+octave:24> title ('y = -0.89286 x^2 + 5.65 x - 4.4')
+octave:25> print graph2.png -dpng
+octave:26> print('graph2.pdf','-dpdf')
+octave:27> P = polyfit (xdata, ydata, 2)
+P =
+
+  -0.8929   5.6500  -4.4000
+
+octave:28> y = polyval (P,xdata)
+y =
+
+   0.3571
+   3.3286
+   4.5143
+   3.9143
+   1.5286
+  -2.6429
+
+octave:29> plot(xdata,ydata,'o-',xdata,y,'+-')
+octave:30> grid on ;
+octave:31> legend ('original data' , 'polyfit data' ) ;
+octave:32> print('graph3.pdf','-dpdf')
+octave:33> print graph3.png -dpng
+octave:34> clear
+octave:35> clf
+octave:36> D = [ 1 1 3 3 2 1 3 ; 2 0 0 2 3 2 2 ]
+D =
+
+   1   1   3   3   2   1   3
+   2   0   0   2   3   2   2
+
+octave:37> x = D(1,:)
+x =
+
+   1   1   3   3   2   1   3
+
+octave:38> y = D(2,:)
+y =
+
+   2   0   0   2   3   2   2
+
+octave:39> plot (x,y)
+octave:40> print graph4.png -dpng
+octave:41> print('graph4.pdf','-dpdf')
+octave:42> clf
+octave:43> clear
+octave:44> theta1 = 90*pi/180
+theta1 = 1.5708
+octave:45> R1 = [cos(theta1) -sin(theta1); sin(theta1) cos(theta1)]
+R1 =
+
+   6.1232e-17  -1.0000e+00
+   1.0000e+00   6.1232e-17
+
+octave:46> RD1 = R1*D
+error: 'D' undefined near line 1, column 1
+octave:47> D = [ 1 1 3 3 2 1 3 ; 2 0 0 2 3 2 2 ]
+D =
+
+   1   1   3   3   2   1   3
+   2   0   0   2   3   2   2
+
+octave:48> R1 = [cos(theta1) -sin(theta1); sin(theta1) cos(theta1)]
+R1 =
+
+   6.1232e-17  -1.0000e+00
+   1.0000e+00   6.1232e-17
+
+octave:49> RD1 = R1*D
+RD1 =
+
+  -2.0000e+00   6.1232e-17   1.8370e-16  -2.0000e+00  -3.0000e+00  -2.0000e+00  -2.0000e+00
+   1.0000e+00   1.0000e+00   3.0000e+00   3.0000e+00   2.0000e+00   1.0000e+00   3.0000e+00
+
+octave:50> x1 = RD1(1,:)
+x1 =
+
+  -2.0000e+00   6.1232e-17   1.8370e-16  -2.0000e+00  -3.0000e+00  -2.0000e+00  -2.0000e+00
+
+octave:51> y1 = RD1(2,:)
+y1 =
+
+   1.0000   1.0000   3.0000   3.0000   2.0000   1.0000   3.0000
+
+octave:52> theta2 = 225*pi/180
+theta2 = 3.9270
+octave:53> R2 = [cos(theta2) -sin(theta2); sin(theta2) cos(theta2)]
+R2 =
+
+  -0.7071   0.7071
+  -0.7071  -0.7071
+
+octave:54> RD2 = R2*D
+RD2 =
+
+   0.7071  -0.7071  -2.1213  -0.7071   0.7071   0.7071  -0.7071
+  -2.1213  -0.7071  -2.1213  -3.5355  -3.5355  -2.1213  -3.5355
+
+octave:55> x2 = RD2(1,:)
+x2 =
+
+   0.7071  -0.7071  -2.1213  -0.7071   0.7071   0.7071  -0.7071
+
+octave:56> y2 = RD2(2,:)
+y2 =
+
+  -2.1213  -0.7071  -2.1213  -3.5355  -3.5355  -2.1213  -3.5355
+
+octave:57> plot (x,y, 'bo-' , x1 , y1 , 'ro-' , x2 , y2 , 'go-' )
+error: 'x' undefined near line 1, column 1
+octave:58> axis ([-4 4 -4 4] , 'equal' ) ;
+octave:59> grid on ;
+octave:60> legend ('original' , 'rotated 90 deg' , 'rotated 225 deg' ) ;
+error: legend: no valid object to label
+error: called from
+    legend>parse_opts at line 762 column 7
+    legend at line 206 column 8
+octave:61> clf
+octave:62> clear
+octave:63> D = [ 1 1 3 3 2 1 3 ; 2 0 0 2 3 2 2 ]
+D =
+
+   1   1   3   3   2   1   3
+   2   0   0   2   3   2   2
+
+octave:64> x = D(1,:)
+x =
+
+   1   1   3   3   2   1   3
+
+octave:65> y = D(2,:)
+y =
+
+   2   0   0   2   3   2   2
+
+octave:66>  plot (x,y)
+octave:67> theta1 = 90*pi/180
+theta1 = 1.5708
+octave:68> R1 = [cos(theta1) -sin(theta1); sin(theta1) cos(theta1)]
+R1 =
+
+   6.1232e-17  -1.0000e+00
+   1.0000e+00   6.1232e-17
+
+octave:69> RD1 = R1*D
+RD1 =
+
+  -2.0000e+00   6.1232e-17   1.8370e-16  -2.0000e+00  -3.0000e+00  -2.0000e+00  -2.0000e+00
+   1.0000e+00   1.0000e+00   3.0000e+00   3.0000e+00   2.0000e+00   1.0000e+00   3.0000e+00
+
+octave:70> x1 = RD1(1,:)
+x1 =
+
+  -2.0000e+00   6.1232e-17   1.8370e-16  -2.0000e+00  -3.0000e+00  -2.0000e+00  -2.0000e+00
+
+octave:71> y1 = RD1(2,:)
+y1 =
+
+   1.0000   1.0000   3.0000   3.0000   2.0000   1.0000   3.0000
+
+octave:72> theta2 = 225*pi/180
+theta2 = 3.9270
+octave:73> R2 = [cos(theta2) -sin(theta2); sin(theta2) cos(theta2)]
+R2 =
+
+  -0.7071   0.7071
+  -0.7071  -0.7071
+
+octave:74> RD2 = R2*D
+RD2 =
+
+   0.7071  -0.7071  -2.1213  -0.7071   0.7071   0.7071  -0.7071
+  -2.1213  -0.7071  -2.1213  -3.5355  -3.5355  -2.1213  -3.5355
+
+octave:75> x2 = RD2(1,:)
+x2 =
+
+   0.7071  -0.7071  -2.1213  -0.7071   0.7071   0.7071  -0.7071
+
+octave:76> y2 = RD2(2,:)
+y2 =
+
+  -2.1213  -0.7071  -2.1213  -3.5355  -3.5355  -2.1213  -3.5355
+
+octave:77> plot (x,y, 'bo-' , x1 , y1 , 'ro-' , x2 , y2 , 'go-' )
+octave:78> axis ([-4 4 -4 4] , 'equal' ) ;
+octave:79> grid on ;
+octave:80> legend ('original' , 'rotated 90 deg' , 'rotated 225 deg' ) ;
+octave:81> print graph5.png -dpng
+octave:82> print('graph5.pdf','-dpdf')
+octave:83> R = [0 1; 1 0]
+R =
+
+   0   1
+   1   0
+
+octave:84> RD = R * D
+RD =
+
+   2   0   0   2   3   2   2
+   1   1   3   3   2   1   3
+
+octave:85> x1 = RD(1,:)
+x1 =
+
+   2   0   0   2   3   2   2
+
+octave:86> y1 = RD(2,:)
+y1 =
+
+   1   1   3   3   2   1   3
+
+octave:87> plot (x,y,'o-',x1,y1,'o-')
+octave:88> axis([-1 4 -1 4], 'equal');
+octave:89> axis([-1 5 -1 5], 'equal');
+octave:90> grid on ;
+octave:91> legend ( 'original' , 'reflected' )
+octave:92> print graph6.png -dpng
+octave:93> print('graph6.pdf','-dpdf')
+octave:94> T = [2 0; 0 2]
+T =
+
+   2   0
+   0   2
+
+octave:95> TD = T*D;
+octave:96> x1 = TD(1,:); y1 = TD(2,:);
+octave:97> plot (x, y, 'o-', x1, y1,'o-')
+octave:98> axis ([-1 7 -1 7], 'equal');
+octave:99> grid on;
+octave:100> legend ('original', 'expanded')
+octave:101> print graph7.png -dpng
+octave:102> print('graph7.pdf','-dpdf')
+octave:103> diary off
