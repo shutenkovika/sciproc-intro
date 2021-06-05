@@ -1,0 +1,20 @@
+octave:2> t = linspace (0,6*pi,50);
+octave:3> r = 2
+r = 2
+octave:4> exit
+octave:2> t = linspace (0,6*pi,50);
+octave:3> r = 2;
+octave:4> x = r*(t-sin(t));
+octave:5> y = r*(1-cos(t));
+octave:6> plot(x,y)
+octave:7> axis('equal');
+octave:8> axis([0 12*pi 0 4])
+octave:9> savefig cycloid.pdf
+octave:10> print -dpdf cycloid.pdf
+octave:11> print -dpdf cycloid.png
+octave:12> theta = linspace(0,2*pi,50);
+octave:13> r = 1-2*sin(theta);
+octave:14> polar(theta,r)
+octave:15> print -dpdf limacon-polar.pdf
+octave:16> print -dpdf limacon-polar.png
+octave:17> exit
